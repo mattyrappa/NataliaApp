@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natalia Barber - Pannello Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Playfair+Display:ital,wght=0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        // PUNTO 4: PROTEZIONE PAGINA ADMIN (SICUREZZA)
+        if (localStorage.getItem('isAdminLoggedIn') !== 'true') {
+            alert("Accesso negato! Devi effettuare il login come amministratore.");
+            window.location.href = "login.html";
+        }
+    </script>
+</head>
+<body>
+
+    <div class="logo">
+        <a href="index.html">Natalia Barber</a>
+    </div>
+
+    <div class="navbar">
+        <div class="nav-links">
+            <a href="prenota.html">Prenota</a>
+            <a href="listino.html">Listino</a>
+            <a href="index.html#mappa">Dove Siamo</a>
+            
+        </div>
+        <div class="nav-icons">
+            <a href="login.html"><i class="fa-solid fa-user"></i></a>
+            <a href="https://wa.me/390123456789?text=Ciao!%20Vorrei%20maggiori%20informazioni." target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="admin-panel">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 20px;">
+                <h2>Pannello Controllo Prenotazioni</h2>
+                <button onclick="clearAllAppointments()" style="background-color: #ff5252; color: white; border: none; padding: 8px 15px; border-radius: 6px; font-weight: bold; cursor: pointer;">
+                    <i class="fa-solid fa-trash-can-list"></i> Svuota Archivio
+                </button>
+            </div>
+
+            <div style="background-color: #111; padding: 15px; border-radius: 10px; margin-bottom: 20px; display: flex; gap: 15px; flex-wrap: wrap; font-family: sans-serif;">
+                <div style="flex: 1; min-width: 150px;">
+                    <label style="color: #828282; font-size: 0.8rem; display: block; margin-bottom: 5px;">Filtra per Barbiere:</label>
+                    <select id="filterBarber" onchange="renderAppointments()" style="width: 100%; background: #333; color: white; border: 1px solid #444; padding: 8px; border-radius: 5px;">
+                        <option value="ALL">Tutti i barbieri</option>
+                        <option value="NOME 1">NOME 1</option>
+                        <option value="NOME 2">NOME 2</option>
+                        <option value="NOME 3">NOME 3</option>
+                    </select>
+                </div>
+                <div style="flex: 1; min-width: 150px;">
+                    <label style="color: #828282; font-size: 0.8rem; display: block; margin-bottom: 5px;">Filtra per Data:</label>
+                    <input type="date" id="filterDate" onchange="renderAppointments()" style="width: 100%; background: #333; color: white; border: 1px solid #444; padding: 6px; border-radius: 5px;">
+                </div>
+                <div style="display: flex; align-items: flex-end;">
+                    <button onclick="resetFilters()" style="background: #828282; color: black; border: none; padding: 8px 12px; border-radius: 5px; font-weight: bold; cursor: pointer;">Resetta</button>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Barbiere</th>
+                            <th>Servizio</th>
+                            <th>Data</th>
+                            <th>Ora</th>
+                            <th>Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody id="appointmentsList"></tbody>
+                </table>
+            </div>
+            
+            <div style="margin-top: 20px; text-align: right;">
+                <button onclick="logoutAdmin()" style="background: none; border: 1px solid #ff5252; color: #ff5252; padding: 6px 12px; border-radius: 5px; cursor: pointer;">Disconnetti Admin</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>© 2026 Natalia Barber. Tutti i diritti riservati.</p>
+            <p>Via Roma, 123 - Milano | Tel: +39 012 3456789</p>
+            <div class="footer-socials">
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-tiktok"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        window.onload = function() {
+            renderAppointments();
+        };
+    </script>
+</body>
+</html>

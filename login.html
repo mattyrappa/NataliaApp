@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natalia Barber - Account</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Playfair+Display:ital,wght=0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="logo">
+        <a href="index.html">Natalia Barber</a>
+    </div>
+
+    <div class="navbar">
+        <div class="nav-links">
+            <a href="prenota.html">Prenota</a>
+            <a href="listino.html">Listino</a>
+            <a href="index.html#mappa">Dove Siamo</a>
+            
+        </div>
+        <div class="nav-icons">
+            <a href="login.html" class="active-link"><i class="fa-solid fa-user"></i></a>
+            <a href="https://wa.me/390123456789?text=Ciao!%20Vorrei%20maggiori%20informazioni." target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="booking-card active" id="authCard">
+            <h2 id="authTitle">Accedi al tuo Account</h2>
+            <div class="auth-form">
+                <input type="text" class="input-name" id="authName" placeholder="Nome e Cognome" style="display: none; margin-bottom: 20px;">
+                <input type="email" class="input-name" id="authEmail" placeholder="Indirizzo Email" style="margin-bottom: 20px;">
+                <input type="password" class="input-name" id="authPassword" placeholder="Password" style="margin-bottom: 30px;">
+                <button class="btn-confirm" id="btnAuthSubmit" onclick="handleAuth()">Accedi</button>
+            </div>
+            <p class="auth-toggle-text" id="authToggleText">
+                Non hai un account? <span onclick="toggleAuthMode(true)">Registrati qui</span>
+            </p>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>© 2026 Natalia Barber. Tutti i diritti riservati.</p>
+            <p>Via Roma, 123 - Milano | Tel: +39 012 3456789</p>
+            <div class="footer-socials">
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-tiktok"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

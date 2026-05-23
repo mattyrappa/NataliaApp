@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natalia Barber - Prenota Servizio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Playfair+Display:ital,wght=0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/themes/dark.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="logo">
+        <a href="index.html">Natalia Barber</a>
+    </div>
+
+    <div class="navbar">
+        <div class="nav-links">
+            <a href="prenota.html" class="active-link">Prenota</a>
+            <a href="listino.html">Listino</a>
+            <a href="index.html#mappa">Dove Siamo</a>
+            
+        </div>
+        <div class="nav-icons">
+            <a href="login.html"><i class="fa-solid fa-user"></i></a>
+            <a href="https://wa.me/390123456789?text=Ciao!%20Vorrei%20maggiori%20informazioni." target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+        </div>
+    </div>
+
+    <div class="content-wrapper">
+        
+        <div class="booking-card active" id="stepBarbiere">
+            <h2>Scegli il tuo barbiere</h2>
+            <div class="barbers-list">
+                <div class="barber-item" onclick="selectBarber('NOME 1')">
+                    <div class="avatar-circle"><i class="fa-solid fa-user"></i></div>
+                    <p>NOME 1</p>
+                </div>
+                <div class="barber-item" onclick="selectBarber('NOME 2')">
+                    <div class="avatar-circle"><i class="fa-solid fa-user"></i></div>
+                    <p>NOME 2</p>
+                </div>
+                <div class="barber-item" onclick="selectBarber('NOME 3')">
+                    <div class="avatar-circle"><i class="fa-solid fa-user"></i></div>
+                    <p>NOME 3</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="booking-card" id="stepServizio">
+            <button class="back-step-btn" onclick="goToStep('stepBarbiere')"><i class="fa-solid fa-chevron-left"></i> Indietro</button>
+            <div class="barber-header">
+                <i class="fa-solid fa-user"></i>
+                <span class="selected-barber-name">NOME 1</span>
+            </div>
+            <h2>Scegli il tuo servizio</h2>
+            <div class="services-grid">
+                <div class="service-item" onclick="selectService('Taglio Capelli', '15€')">
+                    <div class="service-box"><i class="fa-solid fa-scissors"></i></div>
+                    <p>Taglio Capelli</p>
+                    <p class="service-price">15€</p>
+                </div>
+                <div class="service-item" onclick="selectService('Regolazione Barba', '10€')">
+                    <div class="service-box"><i class="fa-solid fa-brush"></i></div>
+                    <p>Regolazione Barba</p>
+                    <p class="service-price">10€</p>
+                </div>
+                <div class="service-item" onclick="selectService('Taglio + Barba', '22€')">
+                    <div class="service-box"><i class="fa-solid fa-sparkles"></i></div>
+                    <p>Taglio + Barba</p>
+                    <p class="service-price">22€</p>
+                </div>
+                <div class="service-item" onclick="selectService('Trattamento Viso', '15€')">
+                    <div class="service-box"><i class="fa-solid fa-hot-tub-person"></i></div>
+                    <p>Trattamento Viso</p>
+                    <p class="service-price">15€</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="booking-card" id="stepCalendario">
+            <button class="back-step-btn" onclick="goToStep('stepServizio')"><i class="fa-solid fa-chevron-left"></i> Indietro</button>
+            <div class="barber-header">
+                <i class="fa-solid fa-user"></i>
+                <span class="selected-barber-name">NOME 1</span>
+            </div>
+            <h2>Scegli il giorno</h2>
+            <div style="margin: 15px 0;">
+                <input type="text" id="datePicker" class="input-date-select" placeholder="Seleziona Data...">
+            </div>
+            <button class="calendar-icon-btn" onclick="selectDate()">
+                <i class="fa-solid fa-calendar-days"></i>
+            </button>
+        </div>
+
+        <div class="booking-card" id="stepOrario">
+            <button class="back-step-btn" onclick="goToStep('stepCalendario')"><i class="fa-solid fa-chevron-left"></i> Indietro</button>
+            <div class="barber-header">
+                <i class="fa-solid fa-user"></i>
+                <span class="selected-barber-name">NOME 1</span>
+            </div>
+            <h2>Scegli l'orario</h2>
+            
+            <div id="fullyBookedMessage" style="display:none; color:#ff5252; margin: 20px 0; font-family:sans-serif; font-weight:bold;">
+                <i class="fa-solid fa-triangle-exclamation"></i> Tutti gli orari per questo giorno sono occupati. Scegli un'altra data.
+            </div>
+
+            <div class="hours-grid" id="hoursGridContainer">
+                <div class="hour-btn-text" data-time="09:00" onclick="selectTime('09:00')">09:00</div>
+                <div class="hour-btn-text" data-time="09:45" onclick="selectTime('09:45')">09:45</div>
+                <div class="hour-btn-text" data-time="10:30" onclick="selectTime('10:30')">10:30</div>
+                <div class="hour-btn-text" data-time="11:15" onclick="selectTime('11:15')">11:15</div>
+                <div class="hour-btn-text" data-time="12:00" onclick="selectTime('12:00')">12:00</div>
+                <div class="hour-btn-text" data-time="15:00" onclick="selectTime('15:00')">15:00</div>
+                <div class="hour-btn-text" data-time="15:45" onclick="selectTime('15:45')">15:45</div>
+                <div class="hour-btn-text" data-time="16:30" onclick="selectTime('16:30')">16:30</div>
+                <div class="hour-btn-text" data-time="17:15" onclick="selectTime('17:15')">17:15</div>
+                <div class="hour-btn-text" data-time="18:00" onclick="selectTime('18:00')">18:00</div>
+                <div class="hour-btn-text" data-time="18:45" onclick="selectTime('18:45')">18:45</div>
+                <div class="hour-btn-text" data-time="19:30" onclick="selectTime('19:30')">19:30</div>
+            </div>
+        </div>
+
+        <div class="booking-card" id="stepConferma">
+            <button class="back-step-btn" onclick="goToStep('stepOrario')"><i class="fa-solid fa-chevron-left"></i> Indietro</button>
+            <div class="barber-header">
+                <i class="fa-solid fa-user"></i>
+                <span class="selected-barber-name">NOME 1</span>
+            </div>
+            <h2>Dettagli Prenotazione</h2>
+            
+            <div class="summary-box" id="summaryDetails"></div>
+
+            <input type="text" class="input-name" id="customerName" placeholder="Il tuo Nome e Cognome" style="margin-bottom: 20px;">
+            <button class="btn-confirm" onclick="finalizzaPrenotazione()">Conferma Appuntamento</button>
+        </div>
+
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p>© 2026 Natalia Barber. Tutti i diritti riservati.</p>
+            <p>Via Roma, 123 - Milano | Tel: +39 012 3456789</p>
+            <div class="footer-socials">
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-facebook"></i>
+                <i class="fa-brands fa-tiktok"></i>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="script.js"></script>
+</body>
+</html>
